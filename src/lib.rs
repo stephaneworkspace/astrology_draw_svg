@@ -2,7 +2,7 @@ use svg::node::element::path::Data;
 use svg::node::element::Path;
 use svg::Document;
 
-pub extern "C" fn write() -> String {
+pub fn write() -> String {
     let data = Data::new()
         .move_to((10, 10))
         .line_by((0, 50))
