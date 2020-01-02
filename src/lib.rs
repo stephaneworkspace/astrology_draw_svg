@@ -2,7 +2,7 @@ use svg::node::element::path::Data;
 use svg::node::element::Path;
 use svg::Document;
 
-pub fn chart(screen_size: f64) -> String {
+pub fn chart(screen_size: f64, path: &str) -> String {
     let data1 = Data::new()
         .move_to((10, 10))
         .line_by((0, 50))
@@ -34,7 +34,7 @@ pub fn chart(screen_size: f64) -> String {
         .add(path1)
         .add(path2);
 
-    svg::save("image.svg", &document).unwrap();
+    svg::save(format!("{}{}", path, "image.svg"), &document).unwrap();
     document.to_string()
 }
 
