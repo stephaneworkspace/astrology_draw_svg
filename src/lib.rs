@@ -17,13 +17,13 @@ pub fn chart(screen_size: f64) -> String {
         .line_by((0, -20))
         .close();
 
-    let path = Path::new()
+    let path1 = Path::new()
         .set("fill", "none")
         .set("stroke", "black")
         .set("stroke-width", 3)
         .set("d", data1);
 
-    let path = Path::new()
+    let path2 = Path::new()
         .set("fill", "none")
         .set("stroke", "red")
         .set("stroke-width", 1)
@@ -31,7 +31,8 @@ pub fn chart(screen_size: f64) -> String {
 
     let document = Document::new()
         .set("viewBox", (0, 0, screen_size as i32, screen_size as i32))
-        .add(path);
+        .add(path1)
+        .add(path2);
 
     //svg::save("image.svg", &document).unwrap();
     document.to_string()
