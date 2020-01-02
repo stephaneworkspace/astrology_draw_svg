@@ -34,7 +34,7 @@ pub fn chart(screen_size: f64) -> String {
         .add(path1)
         .add(path2);
 
-    //svg::save("image.svg", &document).unwrap();
+    svg::save("image.svg", &document).unwrap();
     document.to_string()
 }
 
