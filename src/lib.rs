@@ -1,7 +1,7 @@
 //use svg::node::element::path::Command;
 //use svg::node::element::path::Command::EllipticalArc;
 use svg::node::element::path::Data;
-use svg::node::element::path::{Number, Parameters}; //, Position};
+use svg::node::element::path::Number; // , Parameters}; //, Position};
 use svg::node::element::{Circle, Path};
 use svg::Document;
 
@@ -57,6 +57,7 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         calc_draw.get_radius_total() as i32,
     );
 
+    /*
     // Circle visible to draw
     let mut circle: Vec<Data> = Vec::new();
     let mut ell: Vec<Number> = Vec::new();
@@ -72,29 +73,31 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
                 Parameters::from(ell),
             ))*/
             .close(),
-    );
+    );*/
 
     let data1 = Circle::new()
         .set("fill", "none")
-        .set("cx", 50.0)
-        .set("cy", 50.0)
-        .set("r", 50.0)
+        .set("cx", center.0)
+        .set("cy", center.1)
+        .set("r", calc_draw.get_radius_circle(0).0)
         .set("stroke", "black")
         .set("stroke-width", 3);
 
     let data2 = Circle::new()
         .set("fill", "none")
-        .set("cx", 150.0)
-        .set("cy", 150.0)
-        .set("r", 350.0)
+        .set("cx", center.0)
+        .set("cy", center.1)
+        .set("r", calc_draw.get_radius_circle(1).0)
         .set("stroke", "red")
         .set("stroke-width", 2);
 
+    /*
     let path = Path::new()
         .set("fill", "none")
         .set("stroke", "black")
         .set("stroke-width", 3)
         .set("d", circle[0].clone());
+    */
 
     let document = Document::new()
         .set("viewBox", (0, 0, max_size as i32, max_size as i32))
