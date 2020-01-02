@@ -3,18 +3,31 @@ use svg::node::element::Path;
 use svg::Document;
 
 pub fn chart(screen_size: f64) -> String {
-    let data = Data::new()
+    let data1 = Data::new()
         .move_to((10, 10))
         .line_by((0, 50))
         .line_by((50, 0))
         .line_by((0, -50))
         .close();
 
+    let data2 = Data::new()
+        .move_to((30, 30))
+        .line_by((0, 50))
+        .line_by((20, 0))
+        .line_by((0, -20))
+        .close();
+
     let path = Path::new()
         .set("fill", "none")
         .set("stroke", "black")
         .set("stroke-width", 3)
-        .set("d", data);
+        .set("d", data1);
+
+    let path = Path::new()
+        .set("fill", "none")
+        .set("stroke", "red")
+        .set("stroke-width", 1)
+        .set("d", data2);
 
     let document = Document::new()
         .set("viewBox", (0, 0, screen_size as i32, screen_size as i32))
