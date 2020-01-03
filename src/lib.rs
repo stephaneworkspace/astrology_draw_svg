@@ -170,8 +170,10 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         .add(data2)
         .add(moon_symbol)
         .add(moon_use);
-
-    svg::save(format!("{}{}", path_export, "image.svg"), &document).unwrap();
+    if path_export != "" {
+        svg::save(format!("{}{}", path_export, "image.svg"), &document)
+            .unwrap();
+    }
     document.to_string()
 }
 
