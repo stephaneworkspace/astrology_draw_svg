@@ -165,6 +165,7 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         .set("y", center.1);
 
     let document = Document::new()
+        .set("xmlns:xlink", "http://www.w3.org/1999/xlink")
         .set("viewBox", (0, 0, max_size as i32, max_size as i32))
         .add(data1)
         .add(data2)
