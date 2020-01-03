@@ -158,16 +158,17 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         .add(ws_svg.get_path(Bodies::Moon));
 
     let moon_use = Use::new()
-        .set("xlink:href", ws_svg.get_variable(Bodies::Moon, true))
+        // .set("xlink:href", ws_svg.get_variable(Bodies::Moon, true))
+        .set("href", ws_svg.get_variable(Bodies::Moon, true))
         .set("width", 100)
         .set("height", 100)
         .set("x", center.0)
         .set("y", center.1);
 
     let document = Document::new()
-        .set("baseProfile", "full")
-        .set("version", "1.1")
-        .set("xmlns:xlink", "http://www.w3.org/1999/xlink")
+        // .set("baseProfile", "full")
+        // .set("version", "1.1")
+        // .set("xmlns:xlink", "http://www.w3.org/1999/xlink")
         .set("viewBox", (0, 0, max_size as i32, max_size as i32))
         .add(data1)
         .add(data2)
