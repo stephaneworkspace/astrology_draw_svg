@@ -2,7 +2,7 @@
 //use svg::node::element::path::Command::EllipticalArc;
 use svg::node::element::path::Data;
 use svg::node::element::path::Number; // , Parameters}; //, Position};
-use svg::node::element::{Circle, Path};
+use svg::node::element::{Circle, Path, Symbol, Use};
 use svg::Document;
 
 #[derive(Debug)]
@@ -91,19 +91,45 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         .set("stroke", "red")
         .set("stroke-width", 2);
 
-    /*
-    let path = Path::new()
+    /*let path = Path::new()
         .set("fill", "none")
         .set("stroke", "black")
         .set("stroke-width", 3)
-        .set("d", circle[0].clone());
+        //.set("d", circle[0].clone());
+        .set("d", moon);
     */
+
+    let moon = Data::new()
+        //.move_to((12.5, 3.5))
+        .move_to(center)
+        .elliptical_arc_by((22.5, 22.5, 0, 0, 1, 0, 43)) // 0 0,1 0,43
+        .elliptical_arc_by((22.5, 22.5, 0, 1, 0, 0, -43))
+        .close();
+
+    let moon_path = Path::new()
+        .set("fill", "none")
+        .set("stroke", "black")
+        .set("stroke-width", 3)
+        .set("d", moon);
+
+    let moon_use = Use::new()
+        .set("xlink:href", "#moon")
+        .set("width", 100)
+        .set("height", 100)
+        .set("x", center.0)
+        .set("y", center.1);
+
+    let moon_symbol = Symbol::new()
+        .set("viewBox", (0, 0, max_size as i32, max_size as i32))
+        .set("id", "moon")
+        .add(moon_path);
 
     let document = Document::new()
         .set("viewBox", (0, 0, max_size as i32, max_size as i32))
         .add(data1)
-        .add(data2);
-
+        .add(data2)
+        .add(moon_symbol)
+        .add(moon_use);
     /*
     let data = Data::new()
         .move_to((10, 10))
