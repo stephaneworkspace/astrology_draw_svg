@@ -157,7 +157,7 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         .set("id", ws_svg.get_variable(Bodies::Moon, false))
         .add(ws_svg.get_path(Bodies::Moon));
 
-    /// xlink:href -> depracated and not work with flutter
+    // xlink:href -> depracated and not work with flutter
     let moon_use = Use::new()
         .set("xlink:href", ws_svg.get_variable(Bodies::Moon, true))
         .set("width", 100)
