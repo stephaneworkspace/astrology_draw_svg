@@ -1,15 +1,15 @@
-extern crate scraper;
+extern crate base64;
 extern crate strum;
 use svg::node::element::path::Data;
 use svg::node::element::path::Number;
 use svg::node::element::{Circle, Path, Symbol, Use};
 use svg::Document;
 mod sweconst;
+use base64::encode;
 use sweconst::Bodies;
 //use strum::{AsStaticRef, IntoEnumIterator};
 #[macro_use]
 extern crate strum_macros;
-// use scraper::Html;
 //use strum::AsStaticRef;
 pub mod svg_draw;
 use svg_draw::*;
@@ -94,7 +94,44 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         svg::save(format!("{}{}", path_export, "image.svg"), &document)
             .unwrap();
     }
-    document.to_string()
+    //document.to_string()
+    let html = format!(
+        r#"
+        <!DOCTYPE html>
+        <meta charset="utf8">
+        <head>
+        <title>Astrology</title>
+        <style>
+        .svg-base {{
+            background-repeat: no-repeat;
+        }}
+        .element {{
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            justify-content: center; 
+        }}
+        </style>
+        </head>
+        <h1>Astral chart</h1>
+        <center>
+            <div style="height: {}px; width: {}px">
+                <div 
+                    class="element svg-base" 
+                    style="background-image:url('data:image/svg+xml;base64,{}')"
+                >
+                <!--{}-->
+                </div>
+            </div>
+        </center>
+    "#,
+        max_size as i32,
+        max_size as i32,
+        encode(&document.to_string()),
+        &document.to_string()
+    );
+    html
 }
 
 pub fn write() -> String {
