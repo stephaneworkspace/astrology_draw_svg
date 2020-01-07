@@ -3,9 +3,9 @@ use crate::sweconst::Bodies;
 use strum::AsStaticRef;
 use svg::node::element::path::Data;
 use svg::node::element::path::Number;
-use svg::node::element::{Circle, Path, Symbol, Use};
+//use svg::node::element::{Circle, Path, Symbol, Use};
+use svg::node::element::{Circle, Path};
 use svg::Document;
-
 pub struct WorkingStorageSvg {
     pub center: (Number, Number), // size max of a svg (the space left is u
                                   // transparent)
@@ -20,7 +20,56 @@ impl WorkingStorageSvg {
     }
 }
 
-#[derive(Debug)]
+pub struct WorkingStorageDraw {
+    ws: WorkingStorage,
+}
+
+impl WorkingStorageDraw {
+    pub fn new(ws: WorkingStorage) -> WorkingStorageDraw {
+        WorkingStorageDraw { ws: ws }
+    }
+}
+
+pub trait Draw {
+    fn draw_base(&self) -> Document;
+}
+
+impl Draw for WorkingStorageDraw {
+    fn draw_base(&self) -> Document {
+        let ws_svg =
+            WorkingStorageSvg::new((self.ws.max_size, self.ws.max_size));
+        let calc_draw = self.ws.clone();
+        let data1 = Circle::new()
+            .set("fill", "none")
+            .set("cx", ws_svg.center.0)
+            .set("cy", ws_svg.center.1)
+            .set("r", calc_draw.get_radius_circle(0).0)
+            .set("stroke", "black")
+            .set("stroke-width", 3);
+
+        let data2 = Circle::new()
+            .set("fill", "none")
+            .set("cx", ws_svg.center.0)
+            .set("cy", ws_svg.center.1)
+            .set("r", calc_draw.get_radius_circle(1).0)
+            .set("stroke", "red")
+            .set("stroke-width", 2);
+
+        let document = Document::new()
+            //.set("baseProfile", "full")
+            //.set("version", "1.1")
+            //.set("xmlns:xlink", "http://www.w3.org/1999/xlink")
+            .set(
+                "viewBox",
+                (0, 0, self.ws.max_size as i32, self.ws.max_size as i32),
+            )
+            .add(data1)
+            .add(data2);
+        document
+    }
+}
+
+#[derive(Debug, Clone)]
 pub struct WorkingStorage {
     max_size: Number,
 }

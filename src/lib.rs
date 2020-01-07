@@ -9,7 +9,7 @@ use sweconst::Bodies;
 //use strum::{AsStaticRef, IntoEnumIterator};
 #[macro_use]
 extern crate strum_macros;
-use scraper::Html;
+// use scraper::Html;
 //use strum::AsStaticRef;
 pub mod svg_draw;
 use svg_draw::*;
