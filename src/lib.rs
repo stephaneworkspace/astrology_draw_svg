@@ -10,10 +10,69 @@ use sweconst::Bodies;
 //use strum::{AsStaticRef, IntoEnumIterator};
 #[macro_use]
 extern crate strum_macros;
+use std::fs::File;
+use std::io::prelude::*;
 //use strum::AsStaticRef;
 pub mod svg_draw;
 use svg_draw::*;
 
+/// Create a html file with the natal chart
+pub fn chart_html(
+    max_size: Number,
+    path_and_file_export: &str,
+) -> std::io::Result<()> {
+    // File
+    let mut file = File::create(path_and_file_export)?;
+
+    // Object calc draw for calcul in svg x,y width, height
+    let ws = svg_draw::WorkingStorage::new(max_size);
+    let ws_draw = svg_draw::WorkingStorageDraw::new(ws.clone());
+    let document = format!(
+        r#"
+        <!DOCTYPE html>
+        <meta charset="utf8">
+        <head>
+        <title>Astrology</title>
+        <style>
+        .svg-base {{
+            background-repeat: no-repeat;
+        }}
+        .element {{
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            justify-content: center; 
+        }}
+        </style>
+        </head>
+        <h1>Astral chart</h1>
+        <center>
+            <div style="height: {}px; width: {}px">
+                <div 
+                    class="element svg-base" 
+                    style="background-image:url('data:image/svg+xml;base64,{}')"
+                >
+                <!--{}-->
+                </div>
+            </div>
+        </center>
+    "#,
+        ws.max_size.clone(),
+        ws.max_size.clone(),
+        encode(&ws_draw.draw_base().to_string()),
+        ws_draw.draw_base()
+    );
+
+    if path_and_file_export != "" {
+        file.write_all(&document.as_bytes())?;
+    }
+    //println!("{}", document.clone().to_string());
+    Ok(())
+}
+
+/// Actualy create one svg with path, but in future export a Vec<SomeStruct>
+/// Now i'm concentred in char_html
 pub fn chart(max_size: Number, path_export: &str) -> String {
     let calc_draw = svg_draw::WorkingStorage::new(max_size);
     // Center circle
@@ -134,6 +193,7 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
     html
 }
 
+/// Example (not used, to be deleted in future)
 pub fn write() -> String {
     let data = Data::new()
         .move_to((10, 10))

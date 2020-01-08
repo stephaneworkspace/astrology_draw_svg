@@ -6,6 +6,7 @@ use svg::node::element::path::Number;
 //use svg::node::element::{Circle, Path, Symbol, Use};
 use svg::node::element::{Circle, Path};
 use svg::Document;
+
 pub struct WorkingStorageSvg {
     pub center: (Number, Number), // size max of a svg (the space left is u
                                   // transparent)
@@ -19,7 +20,7 @@ impl WorkingStorageSvg {
         WorkingStorageSvg { center: center }
     }
 }
-
+#[derive(Debug, Clone)]
 pub struct WorkingStorageDraw {
     ws: WorkingStorage,
 }
@@ -36,9 +37,12 @@ pub trait Draw {
 
 impl Draw for WorkingStorageDraw {
     fn draw_base(&self) -> Document {
-        let ws_svg =
-            WorkingStorageSvg::new((self.ws.max_size, self.ws.max_size));
         let calc_draw = self.ws.clone();
+        let center: (Number, Number) = (
+            calc_draw.get_radius_total() as Number,
+            calc_draw.get_radius_total() as Number,
+        );
+        let ws_svg = WorkingStorageSvg::new(center);
         let data1 = Circle::new()
             .set("fill", "none")
             .set("cx", ws_svg.center.0)
@@ -71,7 +75,7 @@ impl Draw for WorkingStorageDraw {
 
 #[derive(Debug, Clone)]
 pub struct WorkingStorage {
-    max_size: Number,
+    pub max_size: Number,
 }
 
 impl WorkingStorage {
