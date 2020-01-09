@@ -13,9 +13,9 @@ extern crate strum_macros;
 use std::fs::File;
 use std::io::prelude::*;
 //use strum::AsStaticRef;
+pub mod html_draw;
 pub mod svg_draw;
 use svg_draw::*;
-
 /// Create a html file with the natal chart
 pub fn chart_html(
     max_size: Number,
@@ -29,35 +29,23 @@ pub fn chart_html(
     let ws_draw = svg_draw::WorkingStorageDraw::new(ws.clone());
     let document = format!(
         r#"
-        <!DOCTYPE html>
-        <meta charset="utf8">
-        <head>
-        <title>Astrology</title>
-        <style>
-        .svg-base {{
-            background-repeat: no-repeat;
-        }}
-        .element {{
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            display: flex; 
-            justify-content: center; 
-        }}
-        </style>
-        </head>
-        <h1>Astral chart</h1>
-        <center>
-            <div style="height: {}px; width: {}px">
-                <div 
-                    class="element svg-base" 
-                    style="background-image:url('data:image/svg+xml;base64,{}')"
-                >
-                <!--{}-->
+        {}
+        <body>
+            <h1>Astrology</h1>
+            <center>
+                <div style="height: {}px; width: {}px">
+                    <div 
+                        class="element svg-base" 
+                        style="background-image:url('data:image/svg+xml;base64,{}')"
+                    >
+                    <!--{}-->
+                    </div>
                 </div>
-            </div>
-        </center>
+            </center>
+        </body>
+    </html>
     "#,
+        html_draw::HTML_HEAD,
         ws.max_size.clone(),
         ws.max_size.clone(),
         encode(&ws_draw.draw_base().to_string()),
