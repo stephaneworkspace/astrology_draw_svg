@@ -31,7 +31,6 @@ pub fn chart_html(
         r#"
         {}
         <body>
-            <h1>Astrology</h1>
             <center>
                 <div style="height: {}px; width: {}px">
                     <div 

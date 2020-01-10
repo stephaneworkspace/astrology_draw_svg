@@ -86,22 +86,21 @@ impl Draw for WorkingStorageDraw {
             calc_draw.get_radius_total() as Number,
         );
         let ws_svg = WorkingStorageSvg::new(center);
-        let data1 = Circle::new()
-            .set("fill", "none")
-            .set("cx", ws_svg.center.0)
-            .set("cy", ws_svg.center.1)
-            .set("r", calc_draw.get_radius_circle(0).0)
-            .set("stroke", "black")
-            .set("stroke-width", 3);
 
-        let data2 = Circle::new()
-            .set("fill", "none")
-            .set("cx", ws_svg.center.0)
-            .set("cy", ws_svg.center.1)
-            .set("r", calc_draw.get_radius_circle(1).0)
-            .set("stroke", "red")
-            .set("stroke-width", 2);
-
+        let mut circle = Vec::new();
+        for (i, ele) in CIRCLE_SIZE.iter().enumerate() {
+            if ele.0 {
+                circle.push(
+                    Circle::new()
+                        .set("fill", "none")
+                        .set("cx", ws_svg.center.0)
+                        .set("cy", ws_svg.center.1)
+                        .set("r", calc_draw.get_radius_circle(i).0)
+                        .set("stroke", "black")
+                        .set("stroke-width", 1),
+                );
+            }
+        }
         let document = Document::new()
             //.set("baseProfile", "full")
             //.set("version", "1.1")
@@ -110,8 +109,9 @@ impl Draw for WorkingStorageDraw {
                 "viewBox",
                 (0, 0, self.ws.max_size as i32, self.ws.max_size as i32),
             )
-            .add(data1)
-            .add(data2);
+            .add(circle[0].clone())
+            .add(circle[1].clone())
+            .add(circle[2].clone());
         document
     }
 }
