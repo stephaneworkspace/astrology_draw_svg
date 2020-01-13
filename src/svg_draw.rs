@@ -7,7 +7,7 @@ use svg::node::element::path::Number;
 use svg::node::element::{Circle, Path};
 use svg::Document;
 
-// Working Storage -CONST
+// Working Storage - CONST
 
 // Const size in %
 // tuple (visible/value)
@@ -44,16 +44,19 @@ pub struct WorkingStorageDraw {
 
 pub trait Draw {
     fn draw_base(&self) -> Document;
+    fn draw_bodie(&self, bodie: Bodies) -> Document;
 }
 
 pub trait CalcDraw {
     fn get_radius_total(&self) -> Number;
     fn get_radius_circle(&self, occurs: usize) -> (Number, bool);
+    fn get_center_equal(&self, max_size: Number) -> (Number, Number);
 }
 
 pub trait BodiesSvg {
     fn get_path(&self, bodie: Bodies) -> Path;
     fn get_variable(&self, bodie: Bodies, sw_link: bool) -> String;
+    fn get_size_equal(&self, bodie: Bodies) -> (Number, Number);
 }
 
 // Methods - Constructors
@@ -114,6 +117,24 @@ impl Draw for WorkingStorageDraw {
             .add(circle[2].clone());
         document
     }
+
+    fn draw_bodie(&self, bodie: Bodies) -> Document {
+        let ws_svg = WorkingStorageSvg::new((0.0, 0.0));
+        let size = ws_svg.get_size_equal(Bodies::Moon);
+        // let path = ws_svg.get_path(bodie);
+        // Not optimized
+        let calc_draw = self.ws.clone();
+        // UGLY
+        let center: (Number, Number) =
+            calc_draw.get_center_equal(ws_svg.get_size_equal(Bodies::Moon).0);
+        // Ugly code poo functional... need to be in future optimized
+        let ws_svg_final = WorkingStorageSvg::new((12.5, 3.5)); //(center);
+        let path_final = ws_svg_final.get_path(bodie);
+        let document = Document::new()
+            // .set("viewBox", (0, 0, size.0, size.1))
+            .add(path_final);
+        document
+    }
 }
 
 impl BodiesSvg for WorkingStorageSvg {
@@ -141,6 +162,13 @@ impl BodiesSvg for WorkingStorageSvg {
             bodie.clone().as_static().to_lowercase()
         }
     }
+    fn get_size_equal(&self, bodie: Bodies) -> (Number, Number) {
+        if bodie == Bodies::Moon {
+            (12.5, 12.5)
+        } else {
+            (0.0, 0.0)
+        }
+    }
 }
 
 impl CalcDraw for WorkingStorage {
@@ -155,5 +183,9 @@ impl CalcDraw for WorkingStorage {
             (self.get_radius_total() * CIRCLE_SIZE[occurs].1) / 100.0,
             CIRCLE_SIZE[occurs].0,
         )
+    }
+    fn get_center_equal(&self, max_size: Number) -> (Number, Number) {
+        let result = max_size / 2.0;
+        (result, result)
     }
 }

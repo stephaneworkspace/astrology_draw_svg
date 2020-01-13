@@ -38,6 +38,7 @@ pub fn chart_html(
                         style="background-image:url('data:image/svg+xml;base64,{}')"
                     >
                     <!--{}-->
+                    <!--{}-->
                     </div>
                 </div>
             </center>
@@ -48,7 +49,8 @@ pub fn chart_html(
         ws.max_size.clone(),
         ws.max_size.clone(),
         encode(&ws_draw.draw_base().to_string()),
-        ws_draw.draw_base()
+        ws_draw.draw_base(),
+        ws_draw.draw_bodie(Bodies::Moon)
     );
 
     if path_and_file_export != "" {
