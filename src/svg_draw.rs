@@ -120,7 +120,22 @@ impl BodiesSvg for WorkingStorageSvg {
     fn draw_bodie(&self, bodie: Bodies) -> Document {
         let size: (Number, Number);
         let path: Path;
-        if bodie == Bodies::Moon {
+        if bodie == Bodies::Sun {
+            size = (50.0, 50.0);
+            let data = Data::new()
+                .move_to((7.0, 25.0))
+                .elliptical_arc_by((18.0, 18.0, 0, 1, 1, 0, 0.1))
+                .move_to((3.0, 0.0))
+                .elliptical_arc_by((15.0, 15.0, 0, 1, 0, 0, -0.1))
+                .move_to((11.0, 0.0))
+                .elliptical_arc_by((4.0, 4.0, 0, 1, 0, 0, -0.1))
+                .close();
+            path = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data);
+        } else if bodie == Bodies::Moon {
             size = (50.0, 50.0);
             let data = Data::new()
                 .move_to((12.5, 3.5))

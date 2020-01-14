@@ -2,8 +2,10 @@ extern crate strum;
 //#[derive(Debug, Clone, Display, EnumIter, AsStaticStr)]
 #[derive(Clone, PartialEq, AsStaticStr)]
 pub enum Bodies {
-    /*    EclNut = -1,
-    Sun = 0,*/
+    /*
+    EclNut = -1,
+    */
+    Sun = 0,
     Moon = 1,
     /*    Mercury = 2,
     Venus = 3,
