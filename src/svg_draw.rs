@@ -123,25 +123,27 @@ impl BodiesSvg for WorkingStorageSvg {
         if bodie == Bodies::Sun {
             size = (50.0, 50.0);
             let data = Data::new()
-                .move_to((7.0, 25.0))
-                .elliptical_arc_by((18.0, 18.0, 0, 1, 1, 0, 0.1))
-                .move_to((3.0, 0.0))
-                .elliptical_arc_by((15.0, 15.0, 0, 1, 0, 0, -0.1))
-                .move_to((11.0, 0.0))
-                .elliptical_arc_by((4.0, 4.0, 0, 1, 0, 0, -0.1))
-                .close();
+                .move_by((7.0, 25.0)) // m
+                .elliptical_arc_by((18.0, 18.0, 0, 1, 1, 0, 0.1)) // a
+                .close() // z
+                .move_by((3.0, 0.0)) // m
+                .elliptical_arc_by((15.0, 15.0, 0, 1, 0, 0, -0.1)) // a
+                .close() // z
+                .move_by((11.0, 0.0)) // m
+                .elliptical_arc_by((4.0, 4.0, 0, 1, 0, 0, -0.1)) // a
+                .close(); // z
             path = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 3)
+                .set("stroke-width", 1)
                 .set("d", data);
         } else if bodie == Bodies::Moon {
             size = (50.0, 50.0);
             let data = Data::new()
-                .move_to((12.5, 3.5))
-                .elliptical_arc_by((22.5, 22.5, 0, 0, 1, 0, 43))
-                .elliptical_arc_by((22.5, 22.5, 0, 1, 0, 0, -43))
-                .close();
+                .move_to((12.5, 3.5)) // M
+                .elliptical_arc_by((22.5, 22.5, 0, 0, 1, 0, 43)) // a
+                .elliptical_arc_by((22.5, 22.5, 0, 1, 0, 0, -43)) // a
+                .close(); // z
             path = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
