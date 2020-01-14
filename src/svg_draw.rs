@@ -120,6 +120,7 @@ impl BodiesSvg for WorkingStorageSvg {
     fn draw_bodie(&self, bodie: Bodies) -> Document {
         let size: (Number, Number);
         let path: Path;
+        let document: Document;
         if bodie == Bodies::Sun {
             size = (50.0, 50.0);
             let data = Data::new()
@@ -137,6 +138,9 @@ impl BodiesSvg for WorkingStorageSvg {
                 .set("stroke", "black")
                 .set("stroke-width", 1)
                 .set("d", data);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(path);
         } else if bodie == Bodies::Moon {
             size = (50.0, 50.0);
             let data = Data::new()
@@ -149,19 +153,41 @@ impl BodiesSvg for WorkingStorageSvg {
                 .set("stroke", "black")
                 .set("stroke-width", 1)
                 .set("d", data);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(path);
         } else if bodie == Bodies::Mercury {
             size = (50.0, 50.0);
-            let data = Data::new()
+            let data1 = Data::new()
                 .move_to((112.0, 36.5)) // M
-                .close()
-
+                .elliptical_arc_to((11.5, 11.5, 0, 1, 1, 89, 36.5)) // A
+                .elliptical_arc_to((11.5, 11.5, 1, 1, 1, 112, 36.5)) // A
+                .close(); // z
+            let data2 = Data::new()
+                .move_to((111.9469, 37.603862))
+                .elliptical_arc_to((11.5, 11.5, 0, 0, 1, 89.052015, 37.592533))
+                .close(); // z
+            let path1 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 1)
+                .set("d", data1);
+            let path2 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 1)
+                .set("d", data2);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(path1)
+                .add(path2);
         } else {
             size = (0.0, 0.0);
             path = Path::new();
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(path);
         }
-        let document = Document::new()
-            .set("viewBox", (0, 0, size.0, size.1))
-            .add(path);
         document
     }
 }
