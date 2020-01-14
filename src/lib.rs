@@ -2,7 +2,7 @@ extern crate base64;
 extern crate strum;
 use svg::node::element::path::Data;
 use svg::node::element::path::Number;
-use svg::node::element::{Circle, Path, Symbol, Use};
+use svg::node::element::{Circle, Path};
 use svg::Document;
 mod sweconst;
 use base64::encode;
@@ -27,6 +27,7 @@ pub fn chart_html(
     // Object calc draw for calcul in svg x,y width, height
     let ws = svg_draw::WorkingStorage::new(max_size);
     let ws_draw = svg_draw::WorkingStorageDraw::new(ws.clone());
+    let ws_svg = svg_draw::WorkingStorageSvg::new((0.0, 0.0)); // not good code
     let document = format!(
         r#"
         {}
@@ -50,7 +51,7 @@ pub fn chart_html(
         ws.max_size.clone(),
         encode(&ws_draw.draw_base().to_string()),
         ws_draw.draw_base(),
-        ws_draw.draw_bodie(Bodies::Moon)
+        ws_svg.draw_bodie(Bodies::Moon)
     );
 
     if path_and_file_export != "" {
@@ -114,30 +115,13 @@ pub fn chart(max_size: Number, path_export: &str) -> String {
         .set("d", moon);
     */
 
-    let ws_svg = svg_draw::WorkingStorageSvg::new(center);
-
-    let moon_symbol = Symbol::new()
-        .set("viewBox", (0, 0, max_size as i32, max_size as i32))
-        .set("id", ws_svg.get_variable(Bodies::Moon, false))
-        .add(ws_svg.get_path(Bodies::Moon));
-
-    // xlink:href -> depracated and not work with flutter
-    let moon_use = Use::new()
-        .set("xlink:href", ws_svg.get_variable(Bodies::Moon, true))
-        .set("width", 100)
-        .set("height", 100)
-        .set("x", center.0)
-        .set("y", center.1);
-
     let document = Document::new()
         .set("baseProfile", "full")
         .set("version", "1.1")
         .set("xmlns:xlink", "http://www.w3.org/1999/xlink")
         .set("viewBox", (0, 0, max_size as i32, max_size as i32))
         .add(data1)
-        .add(data2)
-        .add(moon_symbol)
-        .add(moon_use);
+        .add(data2);
     if path_export != "" {
         svg::save(format!("{}{}", path_export, "image.svg"), &document)
             .unwrap();
