@@ -147,8 +147,14 @@ impl BodiesSvg for WorkingStorageSvg {
             path = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 3)
+                .set("stroke-width", 1)
                 .set("d", data);
+        } else if bodie == Bodies::Mercury {
+            size = (50.0, 50.0);
+            let data = Data::new()
+                .move_to((112.0, 36.5)) // M
+                .close()
+
         } else {
             size = (0.0, 0.0);
             path = Path::new();
