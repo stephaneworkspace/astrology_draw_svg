@@ -4,7 +4,7 @@ use crate::sweconst::Bodies;
 use svg::node::element::path::Data;
 use svg::node::element::path::Number;
 //use svg::node::element::{Circle, Path, Symbol, Use};
-use svg::node::element::{Circle, Path};
+use svg::node::element::{Circle, Group, Path};
 use svg::Document;
 
 // Working Storage - CONST
@@ -161,26 +161,51 @@ impl BodiesSvg for WorkingStorageSvg {
             let data1 = Data::new()
                 .move_to((112.0, 36.5)) // M
                 .elliptical_arc_to((11.5, 11.5, 0, 1, 1, 89, 36.5)) // A
-                .elliptical_arc_to((11.5, 11.5, 1, 1, 1, 112, 36.5)) // A
+                .elliptical_arc_to((11.5, 11.5, 0, 1, 1, 112, 36.5)) // A
                 .close(); // z
             let data2 = Data::new()
-                .move_to((111.9469, 37.603862))
-                .elliptical_arc_to((11.5, 11.5, 0, 0, 1, 89.052015, 37.592533))
-                .close(); // z
+                .move_to((111.9469, 37.603862)) // M
+                .elliptical_arc_to((11.5, 11.5, 0, 0, 1, 89.052015, 37.592533));
+            let data3 = Data::new()
+                .move_to((373.83706, 512.99267)) // M
+                .line_to((373.83706, 524.99267)); // L
+            let data4 = Data::new()
+                .move_to((368.83706, 519.99267)) // M
+                .line_to((378.83706, 519.99267)); // L
             let path1 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
                 .set("stroke-width", 1)
-                .set("d", data1);
+                .set("d", data1)
+                .set("transform", "matrix(0.96,0,0,0.96,277.357,466.9525)");
             let path2 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
                 .set("stroke-width", 1)
-                .set("d", data2);
+                .set("d", data2)
+                .set(
+                    "transform",
+                    "matrix(0.810715,0,0,0.810715,292.4483,451.9429)",
+                );
+            let path3 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 1)
+                .set("d", data3);
+            let path4 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 1)
+                .set("d", data4);
+            let group = Group::new()
+                .set("transform", "translate(-348.7552,-478.0905)")
+                .add(path1)
+                .add(path2)
+                .add(path3)
+                .add(path4);
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
-                .add(path1)
-                .add(path2);
+                .add(group);
         } else {
             size = (0.0, 0.0);
             path = Path::new();

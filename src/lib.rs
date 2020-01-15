@@ -41,6 +41,7 @@ pub fn chart_html(
                     <!--{}-->
                     <!--{}-->
                     <!--{}-->
+                    <!--{}-->
                     </div>
                 </div>
             </center>
@@ -53,7 +54,8 @@ pub fn chart_html(
         encode(&ws_draw.draw_base().to_string()),
         ws_draw.draw_base(),
         ws_svg.draw_bodie(Bodies::Sun),
-        ws_svg.draw_bodie(Bodies::Moon)
+        ws_svg.draw_bodie(Bodies::Moon),
+        ws_svg.draw_bodie(Bodies::Mercury)
     );
 
     if path_and_file_export != "" {
