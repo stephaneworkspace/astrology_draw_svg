@@ -345,6 +345,47 @@ impl BodiesSvg for WorkingStorageSvg {
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
                 .add(group);
+        } else if bodie == Bodies::Uranus {
+            size = (50.0, 50.0);
+            let data1 = Data::new()
+                .move_to((14.65, 31.64)) // M
+                .horizontal_line_by(-7)
+                .vertical_line_by((-114, -1))
+                .vertical_line_by((-201, -4, -1))
+                .vertical_line_by(-1)
+                .horizontal_line_by(7)
+                .vertical_line_by(24)
+                .close()
+                .move_to((36.65, 31.64)) // M
+                .horizontal_line_by(7)
+                .vertical_line_by((-11, -4, -1))
+                .vertical_line_by((-2014, -1))
+                .vertical_line_by(-1)
+                .horizontal_line_by(-7)
+                .vertical_line_by(24)
+                .close();
+            let data2 = Data::new()
+                .move_to((13.65, 19.64)) // M
+                .horizontal_line_by(24)
+                .move_by((-12, -12))
+                .vertical_line_by(27)
+                .move_by((-0.01, 0)) // m
+                .elliptical_arc_by((4, 4, 0, 1, 0, 0.02, 0))
+                .close();
+            let path1 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data1);
+            let path2 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data2);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(path1)
+                .add(path2);
         } else {
             size = (0.0, 0.0);
             path = Path::new();
