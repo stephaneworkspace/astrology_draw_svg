@@ -136,7 +136,7 @@ impl BodiesSvg for WorkingStorageSvg {
             path = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 3)
                 .set("d", data);
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
@@ -151,7 +151,7 @@ impl BodiesSvg for WorkingStorageSvg {
             path = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 3)
                 .set("d", data);
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
@@ -175,13 +175,13 @@ impl BodiesSvg for WorkingStorageSvg {
             let path1 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 3)
                 .set("d", data1)
                 .set("transform", "matrix(0.96,0,0,0.96,277.357,466.9525)");
             let path2 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 3)
                 .set("d", data2)
                 .set(
                     "transform",
@@ -190,12 +190,12 @@ impl BodiesSvg for WorkingStorageSvg {
             let path3 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 3)
                 .set("d", data3);
             let path4 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 3)
                 .set("d", data4);
             let group = Group::new()
                 .set("transform", "translate(-348.7552,-478.0905)")
@@ -217,7 +217,7 @@ impl BodiesSvg for WorkingStorageSvg {
             path = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 5)
                 .set("d", data);
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
@@ -226,16 +226,16 @@ impl BodiesSvg for WorkingStorageSvg {
             size = (50.0, 50.0);
             let data = Data::new()
                 .move_by((30.0, 21.0)) // m
-                .elliptical_arc_by((12.2, 12.2, 0, 1, 0, 0, 2, 2))
+                .elliptical_arc_by((12.2, 12.2, 0, 1, 0, 2, 2))
                 .close()
-                .move_by((11.1, 0))
-                .move_by((-9, 0))
+                .line_by((1, 1, 11, -11)) // l
+                .move_by((-9, 0)) // m
                 .horizontal_line_by(9) // h
                 .vertical_line_by(9); // v
             path = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 1)
+                .set("stroke-width", 3.3)
                 .set("d", data);
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
