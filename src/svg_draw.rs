@@ -222,6 +222,24 @@ impl BodiesSvg for WorkingStorageSvg {
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
                 .add(path);
+        } else if bodie == Bodies::Mars {
+            size = (50.0, 50.0);
+            let data = Data::new()
+                .move_by((30.0, 21.0)) // m
+                .elliptical_arc_by((12.2, 12.2, 0, 1, 0, 0, 2, 2))
+                .close()
+                .move_by((11.1, 0))
+                .move_by((-9, 0))
+                .horizontal_line_by(9) // h
+                .vertical_line_by(9); // v
+            path = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 1)
+                .set("d", data);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(path);
         } else {
             size = (0.0, 0.0);
             path = Path::new();
