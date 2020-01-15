@@ -11,8 +11,8 @@ pub enum Bodies {
     Venus = 3,
     Mars = 4,
     Jupiter = 5,
-    /*
     Saturn = 6,
+    /*
     Uranus = 7,
     Neptune = 8,
     Pluto = 9,

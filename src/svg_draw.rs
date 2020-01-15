@@ -288,6 +288,63 @@ impl BodiesSvg for WorkingStorageSvg {
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
                 .add(group);
+        } else if bodie == Bodies::Saturn {
+            size = (50.0, 50.0);
+            let data1 = Data::new()
+                .move_to((368.54632, 484.01327)) // M
+                .line_to((368.54632, 513.01327)); // L
+            let data2 = Data::new()
+                .move_to((363.65347, 488.76327)) // M
+                .line_to((375.65347, 488.76327));
+            let data3 = Data::new()
+                .move_to((382.54632, 519.01327)) // M
+                .cubic_curve_to((
+                    381.54632, 520.01327, 380.54632, 521.01327, 379.54632,
+                    521.01327,
+                )) // C
+                .cubic_curve_to((
+                    378.54632, 521.01327, 376.54632, 520.01327, 376.54632,
+                    518.01327,
+                )) // C
+                .cubic_curve_to((
+                    376.54632, 516.01327, 377.54632, 514.01327, 379.54632,
+                    512.01327,
+                ))
+                .cubic_curve_to((
+                    381.54632, 510.01327, 383.54632, 506.01327, 383.54632,
+                    502.01327,
+                )) // C
+                .cubic_curve_to((
+                    383.54632, 498.01327, 381.54632, 494.01327, 377.54632,
+                    494.01327,
+                )) // C
+                .cubic_curve_to((
+                    373.76313, 494.01327, 370.54632, 496.01327, 368.54632,
+                    500.01327,
+                )); // C
+            let path1 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data1);
+            let path2 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data2);
+            let path3 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data3);
+            let group = Group::new()
+                .set("transform", "translate(-348.7552,-478.0905)")
+                .add(path1)
+                .add(path2)
+                .add(path3);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(group);
         } else {
             size = (0.0, 0.0);
             path = Path::new();
