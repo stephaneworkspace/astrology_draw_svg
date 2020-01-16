@@ -348,10 +348,43 @@ impl BodiesSvg for WorkingStorageSvg {
         } else if bodie == Bodies::Uranus {
             size = (50.0, 50.0);
             let data1 = Data::new()
+                .move_to((363.40346, 509.72756)) // M
+                .line_to((356.40346, 509.72756)) // L
+                .line_to((356.40346, 508.72756)) // L
+                .line_to((360.40346, 507.72756)) // L
+                .line_to((360.40346, 487.72756)) // L
+                .line_to((356.40346, 486.72756)) // L
+                .line_to((356.40346, 485.72756)) // L
+                .line_to((363.40346, 485.72756)) // L
+                .line_to((363.40346, 509.72756)) // L
+                .close();
+            let data2 = Data::new()
+                .move_to((385.40346, 509.72756)) // M
+                .line_to((392.40346, 509.72756)) // L
+                .line_to((392.40346, 508.72756)) // L
+                .line_to((388.40346, 507.72756)) // L
+                .line_to((388.40346, 487.72756)) // L
+                .line_to((392.40346, 486.72756)) // L
+                .line_to((392.40346, 485.72756)) // L
+                .line_to((385.40346, 485.72756)) // L
+                .line_to((385.40346, 509.72756)) // L
+                .close();
+            let data3 = Data::new()
+                .move_to((362.40346, 494.72756)) // M
+                .line_to((386.40346, 497.72756)); // L
+            let data4 = Data::new()
+                .move_to((374.40346, 485.72756))
+                .line_to((374.40346, 511.72756)); // L
+            let data5 = Data::new()
+                .move_to((40, 211)) // M
+                .elliptical_arc_to((4, 4, 0, 1, 1, 32, 211)) // A
+                .elliptical_arc_to((4, 4, 0, 1, 1, 40, 211)) // A
+                .close();
+            /*let data1 = Data::new()
                 .move_to((14.65, 31.64)) // M
                 .horizontal_line_by(-7)
-                .vertical_line_by((-114, -1))
-                .vertical_line_by((-201, -4, -1))
+                .vertical_line_by((-11, 4, -1)) // -114
+                .vertical_line_by((-20, 1, -4, -1)) // -201
                 .vertical_line_by(-1)
                 .horizontal_line_by(7)
                 .vertical_line_by(24)
@@ -359,7 +392,7 @@ impl BodiesSvg for WorkingStorageSvg {
                 .move_to((36.65, 31.64)) // M
                 .horizontal_line_by(7)
                 .vertical_line_by((-11, -4, -1))
-                .vertical_line_by((-2014, -1))
+                .vertical_line_by((-20, 14, -1)) // -2014
                 .vertical_line_by(-1)
                 .horizontal_line_by(-7)
                 .vertical_line_by(24)
@@ -371,7 +404,7 @@ impl BodiesSvg for WorkingStorageSvg {
                 .vertical_line_by(27)
                 .move_by((-0.01, 0)) // m
                 .elliptical_arc_by((4, 4, 0, 1, 0, 0.02, 0))
-                .close();
+                .close();*/
             let path1 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
@@ -382,10 +415,32 @@ impl BodiesSvg for WorkingStorageSvg {
                 .set("stroke", "black")
                 .set("stroke-width", 3)
                 .set("d", data2);
+            let path3 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data3);
+            let path4 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data4);
+            let path5 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data5)
+                .set("transform", "translate(338.4034,305.7276)");
+            let group = Group::new()
+                .set("transform", "translate(-348.7552,-478.0905)")
+                .add(path1)
+                .add(path2)
+                .add(path3)
+                .add(path4)
+                .add(path5);
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
-                .add(path1)
-                .add(path2);
+                .add(group);
         } else {
             size = (0.0, 0.0);
             path = Path::new();
