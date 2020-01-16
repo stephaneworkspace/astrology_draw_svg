@@ -370,41 +370,16 @@ impl BodiesSvg for WorkingStorageSvg {
                 .line_to((385.40346, 509.72756)) // L
                 .close();
             let data3 = Data::new()
-                .move_to((362.40346, 494.72756)) // M
+                .move_to((362.40346, 497.72756)) // M
                 .line_to((386.40346, 497.72756)); // L
             let data4 = Data::new()
-                .move_to((374.40346, 485.72756))
+                .move_to((374.40346, 485.72756)) // M
                 .line_to((374.40346, 511.72756)); // L
             let data5 = Data::new()
                 .move_to((40, 211)) // M
                 .elliptical_arc_to((4, 4, 0, 1, 1, 32, 211)) // A
                 .elliptical_arc_to((4, 4, 0, 1, 1, 40, 211)) // A
                 .close();
-            /*let data1 = Data::new()
-                .move_to((14.65, 31.64)) // M
-                .horizontal_line_by(-7)
-                .vertical_line_by((-11, 4, -1)) // -114
-                .vertical_line_by((-20, 1, -4, -1)) // -201
-                .vertical_line_by(-1)
-                .horizontal_line_by(7)
-                .vertical_line_by(24)
-                .close()
-                .move_to((36.65, 31.64)) // M
-                .horizontal_line_by(7)
-                .vertical_line_by((-11, -4, -1))
-                .vertical_line_by((-20, 14, -1)) // -2014
-                .vertical_line_by(-1)
-                .horizontal_line_by(-7)
-                .vertical_line_by(24)
-                .close();
-            let data2 = Data::new()
-                .move_to((13.65, 19.64)) // M
-                .horizontal_line_by(24)
-                .move_by((-12, -12))
-                .vertical_line_by(27)
-                .move_by((-0.01, 0)) // m
-                .elliptical_arc_by((4, 4, 0, 1, 0, 0.02, 0))
-                .close();*/
             let path1 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
@@ -428,7 +403,7 @@ impl BodiesSvg for WorkingStorageSvg {
             let path5 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
-                .set("stroke-width", 3)
+                .set("stroke-width", 1)
                 .set("d", data5)
                 .set("transform", "translate(338.4034,305.7276)");
             let group = Group::new()
