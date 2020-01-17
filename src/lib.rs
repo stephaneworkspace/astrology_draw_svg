@@ -48,6 +48,7 @@ pub fn chart_html(
                     <!--{}-->
                     <!--{}-->
                     <!--{}-->
+                    <!--{}-->
                     </div>
                 </div>
             </center>
@@ -67,7 +68,8 @@ pub fn chart_html(
         ws_svg.draw_bodie(Bodies::Jupiter),
         ws_svg.draw_bodie(Bodies::Saturn),
         ws_svg.draw_bodie(Bodies::Uranus),
-        ws_svg.draw_bodie(Bodies::Neptune)
+        ws_svg.draw_bodie(Bodies::Neptune),
+        ws_svg.draw_bodie(Bodies::Pluto)
     );
 
     if path_and_file_export != "" {

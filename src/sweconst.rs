@@ -14,8 +14,8 @@ pub enum Bodies {
     Saturn = 6,
     Uranus = 7,
     Neptune = 8,
-    /*
     Pluto = 9,
+    /*
     MeanNode = 10,
     TrueNode = 11,
     MeanApog = 12,

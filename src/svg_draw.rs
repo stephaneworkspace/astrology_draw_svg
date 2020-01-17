@@ -487,6 +487,53 @@ impl BodiesSvg for WorkingStorageSvg {
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
                 .add(group);
+        } else if bodie == Bodies::Pluto {
+            size = (50.0, 50.0);
+            let data1 = Data::new()
+                .move_to((275.59914, 423.24813)) // M
+                .line_to((291.59914, 423.24813)); // L
+            let data2 = Data::new()
+                .move_to((283.59914, 431.24813)) // M
+                .line_to((283.59914, 414.24813)); // L
+            let data3 = Data::new()
+                .move_to((172, 184)) // M
+                .elliptical_arc_to((7, 7, 0, 1, 1, 158, 184)) // A
+                .elliptical_arc_to((7, 7, 0, 1, 1, 172, 184)) // A
+                .close(); // z
+            let data4 = Data::new()
+                .move_to((177, 184)) // M
+                .elliptical_arc_to((12, 12, 0, 1, 1, 153, 184)); //A
+            let path1 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data1);
+            let path2 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data2);
+            let path3 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data3)
+                .set("transform", "translate(118.5991,218.2481)");
+            let path4 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data4)
+                .set("transform", "translate(118.5991,218.2481)");
+            let group = Group::new()
+                .set("transform", "translate(-258.5991,-387.1767)")
+                .add(path1)
+                .add(path2)
+                .add(path3)
+                .add(path4);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(group);
         } else {
             size = (0.0, 0.0);
             path = Path::new();
