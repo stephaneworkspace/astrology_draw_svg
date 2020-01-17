@@ -416,6 +416,39 @@ impl BodiesSvg for WorkingStorageSvg {
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
                 .add(group);
+        } else if bodie == Bodies::Neptune {
+            size = (50.0, 50.0);
+            let data1 = Data::new()
+                .move_to((363.87696, 487.23598)) // M
+                .cubic_curve_to((
+                    361.22262, 505.2704, 365.64653, 507.97556, 374.49435,
+                    507.97556,
+                )) // C
+                .cubic_curve_to((
+                    383.34217, 507.97556, 387.76609, 505.2704, 385.11174,
+                    487.23598,
+                )); // C
+            let data2 = Data::new()
+                .move_to((374.49435, 489.03942)) // M
+                .line_to((374.49435, 522.40309)); // L
+            let path1 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data1);
+            let path2 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data2);
+            let sub_sub_group = Group::new().add(path1).add(path2);
+            let sub_group = Group::new().add(sub_sub_group);
+            let group = Group::new()
+                .set("transform", "translate(-348.7552,-478.0905)")
+                .add(sub_group);
+            document = Document::new()
+                .set("viewBox", (0, 0, size.0, size.1))
+                .add(group);
         } else {
             size = (0.0, 0.0);
             path = Path::new();
