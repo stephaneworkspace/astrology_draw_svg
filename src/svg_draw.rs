@@ -431,6 +431,21 @@ impl BodiesSvg for WorkingStorageSvg {
             let data2 = Data::new()
                 .move_to((374.49435, 489.03942)) // M
                 .line_to((374.49435, 522.40309)); // L
+            let data3 = Data::new()
+                .move_to((367.41609, 515.18933)) // M
+                .line_to((381.57261, 515.18933)); // L
+            let data4 = Data::new()
+                .move_to((358.98361, 489.72545)) // M
+                .line_to((364.00408, 485.92077)) // L
+                .line_to((367.73728, 491.03737)); // L
+            let data5 = Data::new()
+                .move_to((369.98609, 494.03404)) // M
+                .line_to((374.36075, 489.47578)) // L
+                .line_to((378.83336, 493.93421)); // L
+            let data6 = Data::new()
+                .move_to((381.18598, 491.35241)) // M
+                .line_to((384.98296, 486.28478)) // L
+                .line_to((389.95536, 490.15447)); // L
             let path1 = Path::new()
                 .set("fill", "none")
                 .set("stroke", "black")
@@ -441,11 +456,34 @@ impl BodiesSvg for WorkingStorageSvg {
                 .set("stroke", "black")
                 .set("stroke-width", 3)
                 .set("d", data2);
-            let sub_sub_group = Group::new().add(path1).add(path2);
-            let sub_group = Group::new().add(sub_sub_group);
+            let path3 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data3);
+            let path4 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data4);
+            let path5 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data5);
+            let path6 = Path::new()
+                .set("fill", "none")
+                .set("stroke", "black")
+                .set("stroke-width", 3)
+                .set("d", data6);
             let group = Group::new()
                 .set("transform", "translate(-348.7552,-478.0905)")
-                .add(sub_group);
+                .add(path1)
+                .add(path2)
+                .add(path3)
+                .add(path4)
+                .add(path5)
+                .add(path6);
             document = Document::new()
                 .set("viewBox", (0, 0, size.0, size.1))
                 .add(group);
