@@ -83,6 +83,10 @@ pub fn chart_html(
                     Nord Node
                     {}
                     -->
+                    <!--
+                    Chiron
+                    {}
+                    -->
                     </div>
                 </div>
             </center>
@@ -104,7 +108,8 @@ pub fn chart_html(
         ws_svg.draw_bodie(Bodies::Uranus),
         ws_svg.draw_bodie(Bodies::Neptune),
         ws_svg.draw_bodie(Bodies::Pluto),
-        ws_svg.draw_bodie(Bodies::TrueNode)
+        ws_svg.draw_bodie(Bodies::TrueNode),
+        ws_svg.draw_bodie(Bodies::Chiron)
     );
 
     if path_and_file_export != "" {
