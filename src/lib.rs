@@ -4,8 +4,10 @@ use svg::node::element::path::Data;
 use svg::node::element::path::Number;
 use svg::node::element::{Circle, Path};
 use svg::Document;
+mod svg_draw_bodies;
 mod sweconst;
 use base64::encode;
+use svg_draw_bodies::draw_bodie;
 use sweconst::Bodies;
 //use strum::{AsStaticRef, IntoEnumIterator};
 #[macro_use]
@@ -27,7 +29,6 @@ pub fn chart_html(
     // Object calc draw for calcul in svg x,y width, height
     let ws = svg_draw::WorkingStorage::new(max_size);
     let ws_draw = svg_draw::WorkingStorageDraw::new(ws.clone());
-    let ws_svg = svg_draw::WorkingStorageSvg::new((0.0, 0.0)); // not good code
     let document = format!(
         r#"
         {}
@@ -98,18 +99,18 @@ pub fn chart_html(
         ws.max_size.clone(),
         encode(&ws_draw.draw_base().to_string()),
         ws_draw.draw_base(),
-        ws_svg.draw_bodie(Bodies::Sun),
-        ws_svg.draw_bodie(Bodies::Moon),
-        ws_svg.draw_bodie(Bodies::Mercury),
-        ws_svg.draw_bodie(Bodies::Venus),
-        ws_svg.draw_bodie(Bodies::Mars),
-        ws_svg.draw_bodie(Bodies::Jupiter),
-        ws_svg.draw_bodie(Bodies::Saturn),
-        ws_svg.draw_bodie(Bodies::Uranus),
-        ws_svg.draw_bodie(Bodies::Neptune),
-        ws_svg.draw_bodie(Bodies::Pluto),
-        ws_svg.draw_bodie(Bodies::TrueNode),
-        ws_svg.draw_bodie(Bodies::Chiron)
+        draw_bodie(Bodies::Sun),
+        draw_bodie(Bodies::Moon),
+        draw_bodie(Bodies::Mercury),
+        draw_bodie(Bodies::Venus),
+        draw_bodie(Bodies::Mars),
+        draw_bodie(Bodies::Jupiter),
+        draw_bodie(Bodies::Saturn),
+        draw_bodie(Bodies::Uranus),
+        draw_bodie(Bodies::Neptune),
+        draw_bodie(Bodies::Pluto),
+        draw_bodie(Bodies::TrueNode),
+        draw_bodie(Bodies::Chiron)
     );
 
     if path_and_file_export != "" {
