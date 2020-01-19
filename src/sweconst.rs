@@ -15,6 +15,7 @@ pub enum Bodies {
     Uranus = 7,
     Neptune = 8,
     Pluto = 9,
+    TrueNode = 11,
     /*
     MeanNode = 10,
     TrueNode = 11,
